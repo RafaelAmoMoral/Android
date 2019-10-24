@@ -25,46 +25,47 @@
 17-->C:\Users\rafae\AndroidStudioProjects\Clothes\app\src\main\AndroidManifest.xml:8:9-54
 18        android:supportsRtl="true"
 18-->C:\Users\rafae\AndroidStudioProjects\Clothes\app\src\main\AndroidManifest.xml:9:9-35
-19        android:theme="@style/AppTheme" >
-19-->C:\Users\rafae\AndroidStudioProjects\Clothes\app\src\main\AndroidManifest.xml:10:9-40
-20        <activity
-20-->C:\Users\rafae\AndroidStudioProjects\Clothes\app\src\main\AndroidManifest.xml:12:9-18:20
-21            android:name="com.example.clothes.view.ActivityList"
-21-->C:\Users\rafae\AndroidStudioProjects\Clothes\app\src\main\AndroidManifest.xml:13:13-46
-22            android:configChanges="orientation"
-22-->C:\Users\rafae\AndroidStudioProjects\Clothes\app\src\main\AndroidManifest.xml:16:13-48
-23            android:label="@string/title_activity_list"
-23-->C:\Users\rafae\AndroidStudioProjects\Clothes\app\src\main\AndroidManifest.xml:14:13-56
-24            android:screenOrientation="sensor"
-24-->C:\Users\rafae\AndroidStudioProjects\Clothes\app\src\main\AndroidManifest.xml:17:13-47
-25            android:theme="@style/AppTheme.NoActionBar" >
-25-->C:\Users\rafae\AndroidStudioProjects\Clothes\app\src\main\AndroidManifest.xml:15:13-56
-26        </activity>
-27        <activity
-27-->C:\Users\rafae\AndroidStudioProjects\Clothes\app\src\main\AndroidManifest.xml:19:9-27:20
-28            android:name="com.example.clothes.view.ActivitySplashScreen"
-28-->C:\Users\rafae\AndroidStudioProjects\Clothes\app\src\main\AndroidManifest.xml:20:13-54
-29            android:configChanges="orientation"
-29-->C:\Users\rafae\AndroidStudioProjects\Clothes\app\src\main\AndroidManifest.xml:22:13-48
-30            android:screenOrientation="sensor"
-30-->C:\Users\rafae\AndroidStudioProjects\Clothes\app\src\main\AndroidManifest.xml:23:13-47
-31            android:theme="@style/AppTheme.NoActionBar" >
-31-->C:\Users\rafae\AndroidStudioProjects\Clothes\app\src\main\AndroidManifest.xml:21:13-56
-32            <intent-filter>
-32-->C:\Users\rafae\AndroidStudioProjects\Clothes\app\src\main\AndroidManifest.xml:24:13-26:29
-33                <action android:name="android.intent.action.MAIN" />
-33-->C:\Users\rafae\AndroidStudioProjects\Clothes\app\src\main\AndroidManifest.xml:25:17-69
-33-->C:\Users\rafae\AndroidStudioProjects\Clothes\app\src\main\AndroidManifest.xml:25:25-66
-34            </intent-filter>
-35        </activity>
-36        <activity
-36-->C:\Users\rafae\AndroidStudioProjects\Clothes\app\src\main\AndroidManifest.xml:28:9-31:59
-37            android:name="com.example.clothes.view.FormActivity"
-37-->C:\Users\rafae\AndroidStudioProjects\Clothes\app\src\main\AndroidManifest.xml:29:13-46
-38            android:label="@string/title_activity_form"
-38-->C:\Users\rafae\AndroidStudioProjects\Clothes\app\src\main\AndroidManifest.xml:30:13-56
-39            android:theme="@style/AppTheme.NoActionBar" />
-39-->C:\Users\rafae\AndroidStudioProjects\Clothes\app\src\main\AndroidManifest.xml:31:13-56
-40    </application>
-41
-42</manifest>
+19        android:testOnly="true"
+20        android:theme="@style/AppTheme" >
+20-->C:\Users\rafae\AndroidStudioProjects\Clothes\app\src\main\AndroidManifest.xml:10:9-40
+21        <activity
+21-->C:\Users\rafae\AndroidStudioProjects\Clothes\app\src\main\AndroidManifest.xml:12:9-18:20
+22            android:name="com.example.clothes.view.ActivityList"
+22-->C:\Users\rafae\AndroidStudioProjects\Clothes\app\src\main\AndroidManifest.xml:13:13-46
+23            android:configChanges="orientation"
+23-->C:\Users\rafae\AndroidStudioProjects\Clothes\app\src\main\AndroidManifest.xml:16:13-48
+24            android:label="@string/title_activity_list"
+24-->C:\Users\rafae\AndroidStudioProjects\Clothes\app\src\main\AndroidManifest.xml:14:13-56
+25            android:screenOrientation="sensor"
+25-->C:\Users\rafae\AndroidStudioProjects\Clothes\app\src\main\AndroidManifest.xml:17:13-47
+26            android:theme="@style/AppTheme.NoActionBar" >
+26-->C:\Users\rafae\AndroidStudioProjects\Clothes\app\src\main\AndroidManifest.xml:15:13-56
+27        </activity>
+28        <activity
+28-->C:\Users\rafae\AndroidStudioProjects\Clothes\app\src\main\AndroidManifest.xml:19:9-27:20
+29            android:name="com.example.clothes.view.ActivitySplashScreen"
+29-->C:\Users\rafae\AndroidStudioProjects\Clothes\app\src\main\AndroidManifest.xml:20:13-54
+30            android:configChanges="orientation"
+30-->C:\Users\rafae\AndroidStudioProjects\Clothes\app\src\main\AndroidManifest.xml:22:13-48
+31            android:screenOrientation="sensor"
+31-->C:\Users\rafae\AndroidStudioProjects\Clothes\app\src\main\AndroidManifest.xml:23:13-47
+32            android:theme="@style/AppTheme.NoActionBar" >
+32-->C:\Users\rafae\AndroidStudioProjects\Clothes\app\src\main\AndroidManifest.xml:21:13-56
+33            <intent-filter>
+33-->C:\Users\rafae\AndroidStudioProjects\Clothes\app\src\main\AndroidManifest.xml:24:13-26:29
+34                <action android:name="android.intent.action.MAIN" />
+34-->C:\Users\rafae\AndroidStudioProjects\Clothes\app\src\main\AndroidManifest.xml:25:17-69
+34-->C:\Users\rafae\AndroidStudioProjects\Clothes\app\src\main\AndroidManifest.xml:25:25-66
+35            </intent-filter>
+36        </activity>
+37        <activity
+37-->C:\Users\rafae\AndroidStudioProjects\Clothes\app\src\main\AndroidManifest.xml:28:9-31:59
+38            android:name="com.example.clothes.view.FormActivity"
+38-->C:\Users\rafae\AndroidStudioProjects\Clothes\app\src\main\AndroidManifest.xml:29:13-46
+39            android:label="@string/title_activity_form"
+39-->C:\Users\rafae\AndroidStudioProjects\Clothes\app\src\main\AndroidManifest.xml:30:13-56
+40            android:theme="@style/AppTheme.NoActionBar" />
+40-->C:\Users\rafae\AndroidStudioProjects\Clothes\app\src\main\AndroidManifest.xml:31:13-56
+41    </application>
+42
+43</manifest>
