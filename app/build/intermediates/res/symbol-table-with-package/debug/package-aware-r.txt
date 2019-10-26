@@ -1003,6 +1003,14 @@ drawable design_ic_visibility
 drawable design_ic_visibility_off
 drawable design_password_eye
 drawable design_snackbar_background
+drawable form_add_image_icon
+drawable form_bright
+drawable form_calendar_icon
+drawable form_cash_icon
+drawable form_description_icon
+drawable form_favourite_icon
+drawable form_name_icon
+drawable form_size
 drawable hamburguer
 drawable ic_launcher_background
 drawable ic_launcher_foreground
@@ -1063,6 +1071,7 @@ id barrier
 id beginning
 id blocking
 id bottom
+id button
 id buttonPanel
 id center
 id center_horizontal
@@ -1089,11 +1098,11 @@ id design_navigation_view
 id dimensions
 id direct
 id disableHome
-id editText2
+id editText
 id editText3
-id editText4
 id editText5
 id editText6
+id editText7
 id edit_query
 id end
 id enterAlways
@@ -1118,7 +1127,14 @@ id icon_group
 id ifRoom
 id image
 id imageView
+id imageView10
 id imageView2
+id imageView3
+id imageView4
+id imageView6
+id imageView7
+id imageView8
+id imageView9
 id info
 id invisible
 id italic
@@ -1168,7 +1184,6 @@ id scroll
 id scrollIndicatorDown
 id scrollIndicatorUp
 id scrollView
-id scrollView2
 id scrollable
 id search_badge
 id search_bar
@@ -1192,6 +1207,7 @@ id snackbar_text
 id snap
 id snapMargins
 id spacer
+id spinner
 id split_action_bar
 id spread
 id spread_inside
@@ -1294,7 +1310,6 @@ layout activity_form
 layout activity_list
 layout activity_splash_screen
 layout content_activity_list
-layout content_form
 layout design_bottom_navigation_item
 layout design_bottom_sheet_dialog
 layout design_layout_snackbar

@@ -15,6 +15,7 @@ public class FormActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        System.out.println("hola");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form);
         Toolbar toolbar = findViewById(R.id.toolbar);
