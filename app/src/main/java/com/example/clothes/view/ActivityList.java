@@ -23,11 +23,11 @@ public class ActivityList extends AppCompatActivity implements Ilist.View {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        presenter = new ListPresenter(this);
+
         setContentView(R.layout.activity_list);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        presenter = new ListPresenter(this);
 
         FloatingActionButton fab = findViewById(R.id.listadofb);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -43,6 +43,42 @@ public class ActivityList extends AppCompatActivity implements Ilist.View {
     public void showForm() {
         Intent intent=new Intent(ActivityList.this,FormActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d(TAG,"onStart");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d(TAG,"onResume");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d(TAG,"onPause");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d(TAG,"onStop");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.d(TAG,"onRestart");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG,"onDestroy");
     }
 }
 

@@ -16,7 +16,6 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="#ffcc80"
-            app:logo="@drawable/back"
             app:popupTheme="@style/AppTheme.PopupOverlay"
             app:title="Add" />
 
@@ -212,13 +211,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:entries="@android:array/emailAddressTypes"
+                        android:entries="@array/status"
                         android:spinnerMode="dialog" />
                 </LinearLayout>
 
                 <Button
-                    android:id="@+id/button"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/saveButton"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="50dp"
