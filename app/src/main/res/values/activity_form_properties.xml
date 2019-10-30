@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="status">
+        <item>Nuevo</item>
+        <item>Seminuevo</item>
+        <item>Algo Desgastado</item>
+        <item>Desgastado</item>
+        <item>Otro</item>
+    </string-array>
+</resources>
