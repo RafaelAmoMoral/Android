@@ -79,7 +79,6 @@ public class FormActivity extends AppCompatActivity implements IForm.View{
 
     @Override
     public void showMainList() {
-        Intent intent=new Intent(FormActivity.this,ActivityList.class);
-        startActivity(intent);
+        finish();
     }
 }
