@@ -9,6 +9,7 @@ import com.example.clothes.presenter.FormPresenter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -28,9 +29,12 @@ public class FormActivity extends AppCompatActivity implements IForm.View{
         presenter=new FormPresenter(this);
 
         setContentView(R.layout.activity_form);
+        // En estas dos líneas se crea el toolbar del form
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        /*En estas dos líneas se agrega un clickListener al boton con id saveButton y lo asociamos
+        con el método de la clase FormPresenter onClickSaveData()*/
         Button saveButton = findViewById(R.id.saveButton);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,6 +43,12 @@ public class FormActivity extends AppCompatActivity implements IForm.View{
                 presenter.onClickSaveData();
             }
         });
+
+        // Por último obtenermos el ActionBar y añadimos el botón up.
+        ActionBar ab = getSupportActionBar();
+        // Enable the Up button
+        ab.setDisplayHomeAsUpEnabled(true);
+        ab.setDisplayShowHomeEnabled(true);
     }
 
     @Override
@@ -77,6 +87,9 @@ public class FormActivity extends AppCompatActivity implements IForm.View{
         Log.d(TAG,"onDestroy");
     }
 
+    /**
+     * Método encargado de finalizar la vista en la pila de vistas.
+     */
     @Override
     public void showMainList() {
         finish();

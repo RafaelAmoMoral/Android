@@ -14,21 +14,21 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        android:backgroundTint="#ffcc80"
-        app:backgroundTint="#ffcc80"
+        android:backgroundTint="@color/colorPrimary"
+        app:backgroundTint="@color/colorPrimary"
         app:srcCompat="@drawable/add_icon" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ffcc80"
+        android:background="@color/colorPrimary"
         app:layout_anchor="@+id/toolbar"
         app:layout_anchorGravity="center|center_vertical"
+        app:logo="@drawable/hamburguer"
         app:popupTheme="@style/AppTheme.PopupOverlay"
         app:title="Clothes"
-        app:titleTextColor="#FFF"
-        app:logo="@drawable/hamburguer">
+        app:titleTextColor="#FFF">
 
     </androidx.appcompat.widget.Toolbar>
 

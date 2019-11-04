@@ -16,6 +16,8 @@ public class ActivitySplashScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
+
+        //Método encargado de detener la vista 5 segundos después de los cuáles hace que desaparezca de la pila de vistas.
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {

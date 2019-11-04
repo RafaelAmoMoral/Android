@@ -39,6 +39,9 @@ public class ActivityList extends AppCompatActivity implements Ilist.View {
         });
     }
 
+    /**
+     * Método encargado de crear en la pila de vistas el formActivity, e iniciarlo.
+     */
     @Override
     public void showForm() {
         Intent intent=new Intent(ActivityList.this,FormActivity.class);
