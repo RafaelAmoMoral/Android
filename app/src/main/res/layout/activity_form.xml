@@ -51,8 +51,8 @@
                     android:id="@+id/linearLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginEnd="40dp"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -62,72 +62,41 @@
                         android:layout_marginBottom="20dp"
                         android:orientation="horizontal">
 
-                        <ImageView
-                            android:id="@+id/imageView4"
-                            android:layout_width="67dp"
-                            android:layout_height="match_parent"
-                            android:paddingLeft="20dp"
-                            android:paddingRight="20dp"
-                            app:srcCompat="@drawable/form_name_icon" />
-
-                        <EditText
-                            android:id="@+id/editText"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:ems="10"
-                            android:hint="Nombre de prenda"
-                            android:inputType="textPersonName" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginBottom="20dp"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:id="@+id/imageView3"
-                            android:layout_width="66dp"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginBottom="10dp"
-                            app:srcCompat="@drawable/form_cash_icon"
-                            tools:srcCompat="@drawable/form_cash_icon" />
-
-                        <EditText
-                            android:id="@+id/editText3"
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/form_name_inputLayout"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:ems="10"
-                            android:hint="Precio"
-                            android:inputType="numberDecimal" />
+                            android:layout_height="match_parent">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/form_name_editText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:drawableLeft="@drawable/form_name_icon"
+                                android:hint="@string/form_name_text" />
+                        </com.google.android.material.textfield.TextInputLayout>
 
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="44dp"
+                        android:layout_height="match_parent"
                         android:layout_marginBottom="20dp"
                         android:orientation="horizontal">
 
-                        <ImageView
-                            android:id="@+id/imageView6"
-                            android:layout_width="66dp"
-                            android:layout_height="match_parent"
-                            android:paddingLeft="20dp"
-                            android:paddingRight="20dp"
-                            app:srcCompat="@drawable/form_size"
-                            tools:srcCompat="@drawable/form_size" />
-
-                        <EditText
-                            android:id="@+id/editText5"
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/form_price_inputLayout"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:ems="10"
-                            android:hint="Talla"
-                            android:inputType="textPersonName" />
+                            android:layout_height="match_parent">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/form_price_editText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/form_precio_text"
+                                android:drawableLeft="@drawable/form_cash_icon"
+                                android:inputType="number" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
                     </LinearLayout>
 
                     <LinearLayout
@@ -136,22 +105,19 @@
                         android:layout_marginBottom="20dp"
                         android:orientation="horizontal">
 
-                        <ImageView
-                            android:id="@+id/imageView7"
-                            android:layout_width="67dp"
-                            android:layout_height="match_parent"
-                            android:paddingStart="20dp"
-                            android:paddingEnd="20dp"
-                            app:srcCompat="@drawable/form_description_icon" />
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/form_size_inputLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
 
-                        <EditText
-                            android:id="@+id/editText6"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:ems="10"
-                            android:hint="Descripcion"
-                            android:inputType="textPersonName" />
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/form_size_ediText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:drawableLeft="@drawable/form_size"
+                                android:hint="@string/form_talla_text" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
                     </LinearLayout>
 
                     <LinearLayout
@@ -160,22 +126,42 @@
                         android:layout_marginBottom="20dp"
                         android:orientation="horizontal">
 
-                        <ImageView
-                            android:id="@+id/imageView8"
-                            android:layout_width="67dp"
-                            android:layout_height="match_parent"
-                            android:paddingLeft="17dp"
-                            android:paddingRight="17dp"
-                            app:srcCompat="@drawable/form_calendar_icon" />
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/form_description_inputLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
 
-                        <EditText
-                            android:id="@+id/editText7"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:ems="10"
-                            android:hint="Fecha de compra"
-                            android:inputType="date" />
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/form_description_editText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:drawableLeft="@drawable/form_description_icon"
+                                android:inputType="textMultiLine"
+                                android:hint="@string/form_descripcion_text" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="20dp"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/form_date_inputLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/form_date_ediText"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:hint="@string/form_date_text"
+                                android:drawableLeft="@drawable/form_calendar_icon"
+                                android:inputType="date" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
                     </LinearLayout>
 
                     <LinearLayout
@@ -184,20 +170,12 @@
                         android:layout_marginBottom="20dp"
                         android:orientation="horizontal">
 
-                        <ImageView
-                            android:id="@+id/imageView9"
-                            android:layout_width="67dp"
-                            android:layout_height="wrap_content"
-                            android:paddingLeft="20dp"
-                            android:paddingRight="20dp"
-                            app:srcCompat="@drawable/form_favourite_icon"
-                            tools:srcCompat="@drawable/form_favourite_icon" />
-
                         <Switch
                             android:id="@+id/switch1"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:hint="Favorito"
+                            android:drawableLeft="@drawable/form_favourite_icon"
+                            android:hint="@string/form_favourite_text"
                             android:textCursorDrawable="@color/info" />
 
                     </LinearLayout>
@@ -207,13 +185,6 @@
                         android:layout_height="match_parent"
                         android:layout_marginBottom="20dp"
                         android:orientation="horizontal">
-
-                        <ImageView
-                            android:id="@+id/imageView10"
-                            android:layout_width="130dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            app:srcCompat="@drawable/form_bright" />
 
                         <Spinner
                             android:id="@+id/spinner"
@@ -228,12 +199,10 @@
                         android:id="@+id/saveButton"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
                         android:layout_marginTop="20dp"
-                        android:layout_marginRight="20dp"
                         android:layout_marginBottom="20dp"
                         android:background="@color/info"
-                        android:text="Añadir"
+                        android:text="@string/form_add_article_text"
                         android:textColor="@android:color/background_light" />
 
                 </LinearLayout>

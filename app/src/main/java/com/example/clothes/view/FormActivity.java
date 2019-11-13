@@ -8,6 +8,8 @@ import com.example.clothes.interfaces.IForm;
 import com.example.clothes.presenter.FormPresenter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,11 +18,16 @@ import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 public class FormActivity extends AppCompatActivity implements IForm.View{
 
     public static final String TAG = "Clothes/FormActivity";
     private static IForm.Presenter presenter;
+    private static String[] tallas = {"S","XS","M","XM","XL"};
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +56,9 @@ public class FormActivity extends AppCompatActivity implements IForm.View{
         // Enable the Up button
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setDisplayShowHomeEnabled(true);
+
+        setFormFields();
+
     }
 
     @Override
@@ -93,5 +103,73 @@ public class FormActivity extends AppCompatActivity implements IForm.View{
     @Override
     public void showMainList() {
         finish();
+    }
+
+    private void setFormFields(){
+        TextInputEditText nombreEditText = (TextInputEditText) findViewById(R.id.form_name_editText);
+        TextInputEditText precioEditText = (TextInputEditText) findViewById(R.id.form_price_editText);
+        TextInputEditText tallaEditText = (TextInputEditText) findViewById(R.id.form_size_ediText);
+        TextInputEditText descripcionEditText = (TextInputEditText) findViewById(R.id.form_description_editText);
+        TextInputEditText descripcionDateText = (TextInputEditText) findViewById(R.id.form_date_ediText);
+
+        nombreEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    TextInputEditText et = (TextInputEditText) v;
+                    Log.d("AppCRUD", et.getText().toString());
+                    TextInputLayout nombreInputLayout = (TextInputLayout) findViewById(R.id.form_name_inputLayout);
+
+                    if (et.getText().toString().length()==0) {
+                        nombreInputLayout.setError("El campo es obligatorio");
+                    } else {
+                        nombreInputLayout.setError("");
+                    }
+                }
+            }
+        });
+
+        tallaEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    TextInputEditText et = (TextInputEditText) v;
+                    Log.d("AppCRUD", et.getText().toString());
+                    TextInputLayout sizeInputLayout = (TextInputLayout) findViewById(R.id.form_size_inputLayout);
+                    boolean checked=false;
+                    for(int i=0;i<tallas.length && !checked;i++){
+                        if(tallas[i].equals(et.getText().toString().toUpperCase())){
+                            checked=true;
+                        }
+                    }
+                    if (!checked) {
+                        sizeInputLayout.setError("Tallas disponibles "+"S, XS, M, XM, XL");
+                    } else {
+                        sizeInputLayout.setError("");
+                    }
+                }
+            }
+        });
+
+        descripcionEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    TextInputEditText et = (TextInputEditText) v;
+                    Log.d("AppCRUD", et.getText().toString());
+                    TextInputLayout descripcionEditText = (TextInputLayout) findViewById(R.id.form_description_inputLayout);
+                    if (et.getText().toString().length()==0) {
+                        descripcionEditText.setError("El campo es obligatorio");
+                    } else {
+                        descripcionEditText.setError("");
+                    }
+                }
+            }
+        });
+
+
+
+
+
     }
 }
