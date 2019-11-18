@@ -16,14 +16,26 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/my_ic_launcher_round"
         android:supportsRtl="true"
+        android:testOnly="true"
         android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.example.clothes.view.AboutActivity"
+            android:label="@string/title_activity_about"
+            android:parentActivityName="com.example.clothes.view.ActivityList"
+            android:screenOrientation="sensor"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.example.clothes.view.SearchActivity"
+            android:label="@string/title_activity_search"
+            android:parentActivityName="com.example.clothes.view.ActivityList"
+            android:screenOrientation="sensor"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="com.example.clothes.view.ActivityList"
             android:configChanges="orientation"
             android:label="@string/title_activity_list"
             android:screenOrientation="sensor"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="com.example.clothes.view.ActivitySplashScreen"
             android:configChanges="orientation"

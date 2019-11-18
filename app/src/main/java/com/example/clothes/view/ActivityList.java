@@ -13,6 +13,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 public class ActivityList extends AppCompatActivity implements Ilist.View {
@@ -38,6 +39,12 @@ public class ActivityList extends AppCompatActivity implements Ilist.View {
                 presenter.onClickAdd();
             }
         });
+    }
+
+
+    public void about(MenuItem aboutItem){
+        Intent intent = new Intent(ActivityList.this,AboutActivity.class);
+        startActivity(intent);
     }
 
     @Override

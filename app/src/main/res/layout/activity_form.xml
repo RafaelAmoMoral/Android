@@ -17,7 +17,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:title="Add" />
+            app:title="Añadir" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -144,23 +144,36 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginBottom="20dp"
                         android:orientation="horizontal">
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/form_date_inputLayout"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
 
                             <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/form_date_ediText"
+                                android:id="@+id/et_mostrar_hora"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:hint="@string/form_date_text"
                                 android:drawableLeft="@drawable/form_calendar_icon"
-                                android:inputType="date" />
+                                android:hint="@string/form_date_text"
+                                android:inputType="date"
+                                />
                         </com.google.android.material.textfield.TextInputLayout>
+
+                        <Button
+                            android:id="@+id/btn_mostrar_hora"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_weight="3"
+                            android:background="@color/colorPrimary"
+                            android:text="@string/search_activity_button_calendar"
+                            android:textColor="@color/white" />
 
                     </LinearLayout>
 

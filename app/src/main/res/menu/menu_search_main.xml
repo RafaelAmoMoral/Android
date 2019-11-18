@@ -7,7 +7,7 @@
         android:id="@+id/action_settings"
         android:orderInCategory="100"
         android:title="Ordenar"
-        app:showAsAction="never" />
+        app:showAsAction="never"/>
     <item
         android:id="@+id/action_conf"
         android:orderInCategory="100"
@@ -17,5 +17,6 @@
         android:id="@+id/action_about"
         android:orderInCategory="100"
         android:title="Sobre Clothes"
-        app:showAsAction="never" />
+        app:showAsAction="never"/>
 </menu>
+

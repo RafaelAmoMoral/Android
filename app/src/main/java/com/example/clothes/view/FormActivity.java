@@ -25,9 +25,7 @@ public class FormActivity extends AppCompatActivity implements IForm.View{
     public static final String TAG = "Clothes/FormActivity";
     private static IForm.Presenter presenter;
     private static String[] tallas = {"S","XS","M","XM","XL"};
-
-
-
+    private DatePicker datePicker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +56,9 @@ public class FormActivity extends AppCompatActivity implements IForm.View{
         ab.setDisplayShowHomeEnabled(true);
 
         setFormFields();
+
+        this.datePicker = new DatePicker((EditText) findViewById(R.id.et_mostrar_hora),
+                (Button) findViewById(R.id.btn_mostrar_hora));
 
     }
 
@@ -110,7 +111,7 @@ public class FormActivity extends AppCompatActivity implements IForm.View{
         TextInputEditText precioEditText = (TextInputEditText) findViewById(R.id.form_price_editText);
         TextInputEditText tallaEditText = (TextInputEditText) findViewById(R.id.form_size_ediText);
         TextInputEditText descripcionEditText = (TextInputEditText) findViewById(R.id.form_description_editText);
-        TextInputEditText descripcionDateText = (TextInputEditText) findViewById(R.id.form_date_ediText);
+        TextInputEditText descripcionDateText = (TextInputEditText) findViewById(R.id.et_mostrar_hora);
 
         nombreEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
