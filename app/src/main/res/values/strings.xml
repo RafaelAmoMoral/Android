@@ -4,7 +4,7 @@
     <string name="title_activity_listado">activity_listado</string>
     <string name="title_activity_form">FormActivity</string>
     <string name="title_activity_list">ActivityList</string>
-    <string name="title_activity_search">SearchActivity</string>
+    <string name="title_activity_search">Buscar</string>
     <string name="title_activity_about">Sobre Clothes</string>
     <string name="autor">Rafael Amo Moral</string>
     <string name="correo_autor">rafaelamomoral@gmail.com</string>

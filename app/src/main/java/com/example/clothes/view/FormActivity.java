@@ -6,8 +6,6 @@ import android.os.Bundle;
 import com.example.clothes.R;
 import com.example.clothes.interfaces.IForm;
 import com.example.clothes.presenter.FormPresenter;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -17,26 +15,42 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class FormActivity extends AppCompatActivity implements IForm.View{
 
     public static final String TAG = "Clothes/FormActivity";
     private static IForm.Presenter presenter;
     private static String[] tallas = {"S","XS","M","XM","XL"};
+    private String[] arrayEstados = {"Nuevo","Seminuevo","Algo desgastado","Desgastado","Nuevo..."};
     private DatePicker datePicker;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
+    public FormActivity() {
         presenter=new FormPresenter(this);
 
+    }
+
+    @Override
+    protected void onCreate(final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form);
+
         // En estas dos líneas se crea el toolbar del form
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        // Por último obtenermos el ActionBar y añadimos el botón up.
+        ActionBar ab = getSupportActionBar();
+        // Enable the Up button
+        ab.setDisplayHomeAsUpEnabled(true);
+        ab.setDisplayShowHomeEnabled(true);
 
         /*En estas dos líneas se agrega un clickListener al boton con id saveButton y lo asociamos
         con el método de la clase FormPresenter onClickSaveData()*/
@@ -49,17 +63,36 @@ public class FormActivity extends AppCompatActivity implements IForm.View{
             }
         });
 
-        // Por último obtenermos el ActionBar y añadimos el botón up.
-        ActionBar ab = getSupportActionBar();
-        // Enable the Up button
-        ab.setDisplayHomeAsUpEnabled(true);
-        ab.setDisplayShowHomeEnabled(true);
-
         setFormFields();
+        setSpinner();
 
         this.datePicker = new DatePicker((EditText) findViewById(R.id.et_mostrar_hora),
                 (Button) findViewById(R.id.btn_mostrar_hora));
+    }
 
+    private void setSpinner() {
+        Spinner sp = (Spinner) findViewById(R.id.form_tallas_spinner);
+        final List<String> estadosList = new ArrayList<>(Arrays.asList(arrayEstados));
+
+        final ArrayAdapter spinnerAdapter=new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, estadosList);
+        sp.setAdapter(spinnerAdapter);
+
+        sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+        {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+            {
+                String selectedItem = parent.getItemAtPosition(position).toString();
+                if(selectedItem.equals("Nuevo..."))
+                {
+                    AddItemDialog cdd=new AddItemDialog(FormActivity.this,(Spinner)parent, spinnerAdapter, estadosList);
+                    cdd.show();
+                }
+            }
+            public void onNothingSelected(AdapterView<?> parent)
+            {
+
+            }
+        });
     }
 
     @Override
@@ -173,4 +206,5 @@ public class FormActivity extends AppCompatActivity implements IForm.View{
 
 
     }
+
 }

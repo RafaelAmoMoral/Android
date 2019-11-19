@@ -4,6 +4,6 @@
     <string name="search_activity_input_name">Nombre de prenda</string>
     <string name="search_activity_input_state">Filtro por estado</string>
     <string name="search_activity_input_purchase">Fecha de compra</string>
-    <string name="search_activity_button_calendar">Calendario</string>
+    <string name="search_activity_button_calendar">Añadir</string>
     <string name="search_activity_button_search">Filtrar</string>
 </resources>
