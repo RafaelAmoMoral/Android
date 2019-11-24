@@ -41,16 +41,6 @@ public class ActivityList extends AppCompatActivity implements Ilist.View {
         });
     }
 
-    public void about(MenuItem aboutItem){
-        Intent intent = new Intent(ActivityList.this,AboutActivity.class);
-        startActivity(intent);
-    }
-
-    public void search(MenuItem aboutItem){
-        Intent intent = new Intent(ActivityList.this,SearchActivity.class);
-        startActivity(intent);
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -65,6 +55,18 @@ public class ActivityList extends AppCompatActivity implements Ilist.View {
     @Override
     public void showForm() {
         Intent intent=new Intent(ActivityList.this,FormActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void about(MenuItem aboutItem){
+        Intent intent = new Intent(ActivityList.this,AboutActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void search(MenuItem searchItem){
+        Intent intent = new Intent(ActivityList.this,SearchActivity.class);
         startActivity(intent);
     }
 

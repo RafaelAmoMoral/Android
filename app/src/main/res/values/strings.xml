@@ -1,4 +1,5 @@
 <resources>
+    <!--BASICS-->
     <string name="app_name">Clothes</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_listado">activity_listado</string>
@@ -8,5 +9,52 @@
     <string name="title_activity_about">Sobre Clothes</string>
     <string name="autor">Rafael Amo Moral</string>
     <string name="correo_autor">rafaelamomoral@gmail.com</string>
+
+    <!--ACTIVITY LIST-->
+    <string name="list_menu_order">Ordenar</string>
+    <string name="list_menu_conf">Configuración</string>
+    <string name="list_menu_about">Sobre Clothes</string>
+
+    <!--ACTIVITY FORM-->
+    <string name="form_name_text">Nombre</string>
+    <string name="form_precio_text">Precio</string>
+    <string name="form_talla_text">Talla</string>
+    <string name="form_descripcion_text">Descripcion</string>
+    <string name="form_date_text">Fecha de compra</string>
+    <string name="form_favourite_text">Favorito</string>
+    <string name="form_state_text">Estado</string>
+    <string name="form_add_article_text">Añadir</string>
+    <string name="form_menu_options">Opciones</string>
+    <string name="form_menu_delete">Eliminar</string>
+    <string-array name="states">
+        <item>Nuevo</item>
+        <item>Seminuevo</item>
+        <item>Algo Desgastado</item>
+        <item>Desgastado</item>
+        <item>Añadir...</item>
+    </string-array>
+
+    <!--ACTIVITY SEARCH-->
+    <string name="search_activity_title">Filtrar</string>
+    <string name="search_activity_input_name">Nombre de prenda</string>
+    <string name="search_activity_input_state">Filtro por estado</string>
+    <string name="search_activity_input_purchase">Fecha de compra</string>
+    <string name="search_activity_button_calendar">Añadir</string>
+    <string name="search_activity_button_search">Filtrar</string>
+    <string-array name="search_states">
+        <item>Nuevo</item>
+        <item>Seminuevo</item>
+        <item>Algo Desgastado</item>
+        <item>Desgastado</item>
+    </string-array>
+
+
+
+
+    <!--DIALOGS-->
+    <!--ADD ITEM-->
+    <string name="addItem_dialog_title">Añade un nuevo estado</string>
+    <string name="addItem_dialog_add">AÑADIR</string>
+    <string name="addItem_dialog_cancel">CANCELAR</string>
 
 </resources>

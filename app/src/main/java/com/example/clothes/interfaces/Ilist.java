@@ -1,14 +1,18 @@
 package com.example.clothes.interfaces;
 
+import android.view.MenuItem;
+
 public interface Ilist {
 
     // Interfaces anidadas de la interfaz IList
 
-    public interface View{
+    interface View{
         void showForm();
+        void about(MenuItem menuItem);
+        void search(MenuItem searchItem);
     }
 
-    public interface Presenter{
+    interface Presenter{
         void onClickAdd();
     }
 }

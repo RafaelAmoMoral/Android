@@ -3,20 +3,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.clothes.MainActivity">
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/action_order"
         android:orderInCategory="100"
-        android:title="Ordenar"
+        android:title="@string/list_menu_order"
         app:showAsAction="never" />
     <item
-    android:id="@+id/action_conf"
-    android:orderInCategory="100"
-    android:title="Configuración"
-    app:showAsAction="never" />
+        android:id="@+id/action_conf"
+        android:orderInCategory="100"
+        android:title="@string/list_menu_conf"
+        app:showAsAction="never" />
     <item
         android:id="@+id/action_about"
+        android:onClick="about"
         android:orderInCategory="100"
-        android:title="Sobre Clothes"
-        app:showAsAction="never"
-        android:onClick="about"/>
+        android:title="@string/list_menu_about"
+        app:showAsAction="never" />
 </menu>
 

@@ -9,15 +9,15 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:theme="@style/appToolbar">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:title="Añadir" />
+            android:background="@color/white"
+            app:title="@string/title_activity_form"
+            app:popupTheme="@style/AppTheme.PopupOverlay"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -37,15 +37,22 @@
                 android:id="@+id/imageView2"
                 android:layout_width="match_parent"
                 android:layout_height="72dp"
-                android:layout_marginTop="20dp"
-                app:srcCompat="@drawable/form_add_image_icon"
-                tools:srcCompat="@drawable/form_add_image_icon" />
+                android:layout_marginTop="30dp"
+                app:srcCompat="@drawable/ic_add_image"
+                tools:srcCompat="@drawable/ic_add_image" />
+
+            <View
+                android:id="@+id/divider3"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="30dp"
+                android:background="?android:attr/listDivider" />
 
             <ScrollView
                 android:id="@+id/scrollView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="50dp">
+                android:fillViewport="false">
 
                 <LinearLayout
                     android:id="@+id/linearLayout"
@@ -71,7 +78,7 @@
                                 android:id="@+id/form_name_editText"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:drawableLeft="@drawable/form_name_icon"
+                                android:drawableStart="@drawable/ic_tshirt"
                                 android:hint="@string/form_name_text" />
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -92,8 +99,9 @@
                                 android:id="@+id/form_price_editText"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:drawableStart="@drawable/ic_cash"
                                 android:hint="@string/form_precio_text"
-                                android:drawableLeft="@drawable/form_cash_icon"
+                                android:digits="0123456789-"
                                 android:inputType="number" />
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -114,7 +122,7 @@
                                 android:id="@+id/form_size_ediText"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:drawableLeft="@drawable/form_size"
+                                android:drawableStart="@drawable/ic_size"
                                 android:hint="@string/form_talla_text" />
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -135,9 +143,9 @@
                                 android:id="@+id/form_description_editText"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:drawableLeft="@drawable/form_description_icon"
-                                android:inputType="textMultiLine"
-                                android:hint="@string/form_descripcion_text" />
+                                android:drawableStart="@drawable/ic_description"
+                                android:hint="@string/form_descripcion_text"
+                                android:inputType="textMultiLine" />
                         </com.google.android.material.textfield.TextInputLayout>
 
                     </LinearLayout>
@@ -158,16 +166,15 @@
                                 android:id="@+id/et_mostrar_hora"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:drawableLeft="@drawable/form_calendar_icon"
+                                android:drawableStart="@drawable/ic_calendar"
                                 android:hint="@string/form_date_text"
-                                android:inputType="date"
-                                />
+                                android:inputType="date" />
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <Button
                             android:id="@+id/btn_mostrar_hora"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:layout_marginBottom="10dp"
                             android:layout_weight="3"
@@ -187,9 +194,14 @@
                             android:id="@+id/switch1"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:drawableLeft="@drawable/form_favourite_icon"
+                            android:drawableStart="@drawable/ic_favourite"
+                            android:fontFamily="sans-serif"
                             android:hint="@string/form_favourite_text"
-                            android:textCursorDrawable="@color/info" />
+                            android:includeFontPadding="true"
+                            android:paddingStart="7dp"
+                            android:paddingEnd="7dp"
+                            android:textCursorDrawable="@color/info"
+                            android:textSize="18sp" />
 
                     </LinearLayout>
 
@@ -200,20 +212,20 @@
                         android:orientation="horizontal">
 
                         <Spinner
-                            android:id="@+id/form_tallas_spinner"
-                            android:layout_width="match_parent"
+                            android:id="@+id/form_spinner_states"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
+                            android:layout_weight="0"
                             android:spinnerMode="dialog" />
                     </LinearLayout>
 
                     <Button
-                        android:id="@+id/saveButton"
+                        android:id="@+id/id_search_button"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
                         android:layout_marginBottom="20dp"
-                        android:background="@color/info"
+                        android:background="@color/colorPrimary"
                         android:text="@string/form_add_article_text"
                         android:textColor="@android:color/background_light" />
 
