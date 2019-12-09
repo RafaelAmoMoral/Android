@@ -191,7 +191,7 @@
                         android:orientation="horizontal">
 
                         <Switch
-                            android:id="@+id/switch1"
+                            android:id="@+id/form_switch_state"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:drawableStart="@drawable/ic_favourite"
@@ -218,6 +218,20 @@
                             android:layout_weight="0"
                             android:spinnerMode="dialog" />
                     </LinearLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/form_id_inputLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/form_id_editText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/form_id_text"
+                            android:inputType="textMultiLine" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
 
                     <Button
                         android:id="@+id/id_search_button"

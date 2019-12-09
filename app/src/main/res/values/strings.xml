@@ -16,6 +16,8 @@
     <string name="list_menu_about">Sobre Clothes</string>
 
     <!--ACTIVITY FORM-->
+    <string name="form_id_text">Id</string><!--BORRAR-->
+    <string name="form_image_chooser_title">Abrir imagen</string>
     <string name="form_name_text">Nombre</string>
     <string name="form_precio_text">Precio</string>
     <string name="form_talla_text">Talla</string>

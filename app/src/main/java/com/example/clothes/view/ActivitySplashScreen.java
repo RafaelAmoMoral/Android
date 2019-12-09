@@ -1,5 +1,6 @@
 package com.example.clothes.view;
 import com.example.clothes.R;
+import com.example.clothes.view.ActivityList.ActivityList;
 
 
 import androidx.appcompat.app.AppCompatActivity;

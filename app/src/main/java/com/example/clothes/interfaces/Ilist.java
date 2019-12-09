@@ -2,6 +2,10 @@ package com.example.clothes.interfaces;
 
 import android.view.MenuItem;
 
+import com.example.clothes.model.Clothe;
+
+import java.util.List;
+
 public interface Ilist {
 
     // Interfaces anidadas de la interfaz IList
@@ -14,5 +18,6 @@ public interface Ilist {
 
     interface Presenter{
         void onClickAdd();
+        List<Clothe> getClothes();
     }
 }

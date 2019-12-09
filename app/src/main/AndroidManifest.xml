@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.clothes">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -12,24 +15,22 @@
         <activity
             android:name=".view.AboutActivity"
             android:label="@string/title_activity_about"
-            android:parentActivityName=".view.ActivityList"
+            android:parentActivityName=".view.ActivityList.ActivityList"
             android:screenOrientation="sensor"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".view.SearchActivity"
             android:label="@string/title_activity_search"
-            android:parentActivityName=".view.ActivityList"
+            android:parentActivityName=".view.ActivityList.ActivityList"
             android:screenOrientation="sensor"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
-            android:name=".view.ActivityList"
-            android:configChanges="orientation"
+            android:name=".view.ActivityList.ActivityList"
             android:label="@string/title_activity_list"
             android:screenOrientation="sensor"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".view.ActivitySplashScreen"
-            android:configChanges="orientation"
             android:screenOrientation="sensor"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -40,9 +41,8 @@
         </activity>
         <activity
             android:name=".view.FormActivity"
-            android:configChanges="orientation"
             android:label="@string/title_activity_form"
-            android:parentActivityName=".view.ActivityList"
+            android:parentActivityName=".view.ActivityList.ActivityList"
             android:screenOrientation="sensor"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
