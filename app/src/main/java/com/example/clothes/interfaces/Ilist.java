@@ -14,10 +14,14 @@ public interface Ilist {
         void showForm();
         void about(MenuItem menuItem);
         void search(MenuItem searchItem);
+        void displayFormClothe(Clothe selectedClothe);
+        void showDeleteClotheDialog(int clotheSelected);
     }
 
     interface Presenter{
         void onClickAdd();
         List<Clothe> getClothes();
+        void onClotheClicked(Clothe selectedClothe);
+        void onClotheSwipped(int clothSelected);
     }
 }

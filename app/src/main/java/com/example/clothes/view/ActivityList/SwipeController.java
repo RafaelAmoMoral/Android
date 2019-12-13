@@ -78,7 +78,8 @@ class SwipeController extends ItemTouchHelper.Callback {
                 swipeBack = event.getAction() == MotionEvent.ACTION_CANCEL || event.getAction() == MotionEvent.ACTION_UP;
                 if (swipeBack) {
                     if (dX < -buttonWidth){
-                        createSimpleDialog(itemSwipped).show();
+                        parent.getPresenter().onClotheSwipped(itemSwipped);
+                        //createSimpleDialog(itemSwipped).show();
                         buttonShowedState = ButtonsState.RIGHT_VISIBLE;
                     }
                     else if (dX > buttonWidth){
@@ -143,7 +144,7 @@ class SwipeController extends ItemTouchHelper.Callback {
         }
     }
 
-    public AlertDialog createSimpleDialog(final int index) {
+    /*public AlertDialog createSimpleDialog(final int index) {
         AlertDialog dialog;
         AlertDialog.Builder builder = new AlertDialog.Builder(parent);
 
@@ -166,7 +167,7 @@ class SwipeController extends ItemTouchHelper.Callback {
 
         dialog = builder.create();
         return dialog;
-    }
+    }*/
 
 
 }

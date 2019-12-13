@@ -19,6 +19,7 @@ public interface IForm {
         void setSizeError(String error);
         void setDescriptionError(String error);
         void setDateError(String error);
+        void presentePermissionsSnackBar();
     }
 
     interface Presenter{

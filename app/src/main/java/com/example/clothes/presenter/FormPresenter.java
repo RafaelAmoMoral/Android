@@ -10,6 +10,7 @@ import com.example.clothes.interfaces.IForm;
 import com.example.clothes.interfaces.Ilist;
 import com.example.clothes.model.Clothe;
 import com.example.clothes.view.FormActivity;
+import com.google.android.material.snackbar.Snackbar;
 
 public class FormPresenter implements IForm.Presenter {
 
@@ -35,8 +36,7 @@ public class FormPresenter implements IForm.Presenter {
         if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             view.openGallery();
         } else {
-            // Permiso rechazado
-            System.out.println("Permiso denegado");
+            view.presentePermissionsSnackBar();
         }
     }
 

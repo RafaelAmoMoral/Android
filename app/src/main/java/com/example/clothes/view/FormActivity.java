@@ -18,6 +18,7 @@ import com.example.clothes.interfaces.IForm;
 import com.example.clothes.model.Clothe;
 import com.example.clothes.presenter.FormPresenter;
 import com.example.clothes.view.Utils.DatePicker;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -135,8 +136,13 @@ public class FormActivity extends AppCompatActivity implements IForm.View {
     }
 
     @Override
+    public void presentePermissionsSnackBar() {
+        /*View contextView=findViewById(R.id.parent);
+        Snackbar.make(contextView, R.string.form_state_text, Snackbar.LENGTH_SHORT).show();*/
+    }
+
+    @Override
     public void openGallery() {
-        // Se le pide al sistema una imagen del dispositivo
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);

@@ -1,5 +1,7 @@
 package com.example.clothes.view.ActivityList;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -71,9 +73,7 @@ public class ActivityList extends AppCompatActivity implements Ilist.View {
                         String.valueOf(position) + " Id: " + clothesList.get(position).getId() +
                         " Nombre: " + clothesList.get(position).getName(), Toast.LENGTH_SHORT)
                         .show();
-                FormActivity.setClothe(clothesList.get(position));
-                Intent intent = new Intent(ActivityList.this, FormActivity.class);
-                startActivity(intent);
+                presenter.onClotheClicked(clothesList.get(position));
             }
         });
         recyclerView.setAdapter(adaptador);
@@ -86,6 +86,13 @@ public class ActivityList extends AppCompatActivity implements Ilist.View {
     }
 
     @Override
+    public void displayFormClothe(Clothe selectedClothe) {
+        FormActivity.setClothe(selectedClothe);
+        Intent intent = new Intent(ActivityList.this, FormActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -93,6 +100,36 @@ public class ActivityList extends AppCompatActivity implements Ilist.View {
         return true;
     }
 
+    @Override
+    public void showDeleteClotheDialog(final int clotheSelected) {
+        AlertDialog dialog;
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setTitle("¿Está seguro de que desea eliminar?")
+                .setMessage("Recuerde que esta decisión será permanente.")
+                .setPositiveButton("Eliminar",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                removeItemInList(clotheSelected);
+                                Toast.makeText(ActivityList.this, "Elemento eliminado", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                .setNegativeButton("Cancelar",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+
+        dialog = builder.create();
+        dialog.show();
+    }
+
+    public Ilist.Presenter getPresenter() {
+        return presenter;
+    }
 
     @Override
     public void showForm() {

@@ -22,6 +22,11 @@ public class ListPresenter implements Ilist.Presenter {
         return clotheDAO.getAllClothes();
     }
 
+    @Override
+    public void onClotheClicked(Clothe selectedClothe) {
+        view.displayFormClothe(selectedClothe);
+    }
+
     /**
      * Método llamado por la clase ActivityList al pulsar el botón con id listadofb. Este métood se
      * encarga de llamar al método de la vista showForm().
@@ -31,4 +36,8 @@ public class ListPresenter implements Ilist.Presenter {
         view.showForm();
     }
 
+    @Override
+    public void onClotheSwipped(int clotheSelected) {
+        view.showDeleteClotheDialog(clotheSelected);
+    }
 }
