@@ -1,5 +1,7 @@
 package com.example.clothes.view;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.clothes.interfaces.ISearch;
@@ -11,22 +13,28 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import com.example.clothes.R;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
-public class SearchActivity extends AppCompatActivity implements ISearch.View{
+import java.util.ArrayList;
 
-    private static final String TAG="SearchActivity";
+public class SearchActivity extends AppCompatActivity implements ISearch.View {
+
     private ISearch.Presenter presenter;
     private DatePicker datePicker;
+    private TextInputEditText nameEditText;
+    private TextInputEditText dateEditText;
+    private Spinner state;
 
 
     public SearchActivity() {
-        this.presenter=new SearchPresenter(this);
+        this.presenter = new SearchPresenter(this);
     }
 
     @Override
@@ -42,57 +50,69 @@ public class SearchActivity extends AppCompatActivity implements ISearch.View{
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setDisplayShowHomeEnabled(true);
 
+        nameEditText = findViewById(R.id.search_name_editText);
+        dateEditText = findViewById(R.id.search_fecha_editText);
+        state = findViewById(R.id.search_state_spinner);
         Button search = findViewById(R.id.id_search_button);
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.onClickSearchData(new Clothe());
+                searchClothe();
             }
         });
-
-        this.datePicker = new DatePicker((EditText) findViewById(R.id.et_mostrar_hora_search),
+        this.datePicker = new DatePicker((EditText) findViewById(R.id.search_fecha_editText),
                 (Button) findViewById(R.id.btn_mostrar_hora_search));
+
+        setFormFieldsListeners();
+    }
+
+    private void searchClothe() {
+        Clothe c = getClotheFromForm();
+        if (c.getPurchaseDate() != null) {
+            if (presenter.testDate(c.getPurchaseDate())) {
+                presenter.onClickSearchData(c);
+            }
+        } else {
+            presenter.onClickSearchData(c);
+        }
+    }
+
+    private void setFormFieldsListeners() {
+        dateEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    TextInputEditText et = (TextInputEditText) v;
+                    et.setText(et.getText().toString().trim());
+                    presenter.testDate(et.getText().toString());
+                }
+            }
+        });
+    }
+
+    private Clothe getClotheFromForm() {
+        Clothe clothe = new Clothe();
+        clothe.setName((nameEditText.getText().toString().trim().isEmpty()) ? null : nameEditText.getText().toString().trim());
+        clothe.setPurchaseDate((dateEditText.getText().toString().trim().isEmpty()) ? null : dateEditText.getText().toString().trim());
+        clothe.setState((state.getSelectedItem().toString().isEmpty() ||
+                state.getSelectedItem().toString().equals("Seleccione un elemento...")) ?
+                null : state.getSelectedItem().toString().trim());
+        return clothe;
     }
 
     @Override
-    public void showMainList() {
+    public void setDateError(String error) {
+        TextInputLayout descripcionInputLayout = findViewById(R.id.search_date_inputLayout);
+        descripcionInputLayout.setError(error);
+    }
+
+
+    @Override
+    public void showMainList(ArrayList<Clothe> clothes) {
+        Intent resultIntent = new Intent();
+        resultIntent.putParcelableArrayListExtra("clothes", clothes);
+        setResult(Activity.RESULT_OK, resultIntent);
         finish();
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Log.d(TAG,"onStart");
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.d(TAG,"onResume");
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.d(TAG,"onPause");
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.d(TAG,"onStop");
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        Log.d(TAG,"onRestart");
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.d(TAG,"onDestroy");
     }
 
 }

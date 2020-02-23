@@ -3,25 +3,19 @@ package com.example.clothes.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-
 public class Clothe implements Parcelable {
 
-    private Integer id;
-    private String name;
-    private Integer price;
-    private String size;
-    private String description;
-    private Calendar purchaseDate;
-    private static SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-    private String purchaseDateFormated;
-    private boolean isFavorite;
-    private String state;
-    private String image;
+    protected Integer id;
+    protected String name;
+    protected Integer price;
+    protected String size;
+    protected String description;
+    protected String purchaseDate;
+    protected boolean isFavorite;
+    protected String state;
+    protected String image;
 
-    public Clothe(Integer id, String name, Integer price, String size, String description, Calendar purchaseDate,
+    public Clothe(Integer id, String name, Integer price, String size, String description, String purchaseDate,
                   boolean isFavorite, String state, String image) {
         this.id = id;
         this.name = name;
@@ -29,7 +23,6 @@ public class Clothe implements Parcelable {
         this.size = size;
         this.description = description;
         this.purchaseDate = purchaseDate;
-        this.purchaseDateFormated = dateFormat.format(purchaseDate.getTime());
         this.isFavorite = isFavorite;
         this.state = state;
         this.image = image;
@@ -42,7 +35,8 @@ public class Clothe implements Parcelable {
         this.image = image;
     }
 
-    public Clothe() {}
+    public Clothe() {
+    }
 
     protected Clothe(Parcel in) {
         if (in.readByte() == 0) {
@@ -58,7 +52,7 @@ public class Clothe implements Parcelable {
         }
         size = in.readString();
         description = in.readString();
-        purchaseDateFormated = in.readString();
+        purchaseDate = in.readString();
         isFavorite = in.readByte() != 0;
         state = in.readString();
         image = in.readString();
@@ -81,7 +75,7 @@ public class Clothe implements Parcelable {
         }
         dest.writeString(size);
         dest.writeString(description);
-        dest.writeString(purchaseDateFormated);
+        dest.writeString(purchaseDate);
         dest.writeByte((byte) (isFavorite ? 1 : 0));
         dest.writeString(state);
         dest.writeString(image);
@@ -116,52 +110,69 @@ public class Clothe implements Parcelable {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public boolean setName(String name) {
+        boolean valid = name != null ? !name.isEmpty() : false;
+        if (valid) {
+            this.name = name;
+        }
+        return valid;
     }
 
     public Integer getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
-        this.price = price;
+    public boolean setPrice(Integer price) {
+        boolean valid = false;
+        if(price!=null) {
+            valid = price != -1;// -1 es el número que seteo si el campo esta vacío.
+
+            if (valid) {
+                try {
+                    valid = !(price < 0);
+                } catch (NumberFormatException nfe) {
+                }
+            }
+
+            if (valid) {
+                this.price = price;
+            }
+        }
+        return valid;
     }
 
     public String getSize() {
         return size;
     }
 
-    public void setSize(String size) {
-        this.size = size;
+    public boolean setSize(String size) {
+        boolean valid = false;
+        if(size!=null) {
+            String[] tallas = {"S", "XS", "M", "XM", "XL"};
+
+            for (int i = 0; i < tallas.length && !valid; i++) {
+                if (tallas[i].equals(size.toUpperCase())) {
+                    valid = true;
+                }
+            }
+
+            if (valid) {
+                this.size = size;
+            }
+        }
+        return valid;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Calendar getPurchaseDate() {
-        return purchaseDate;
-    }
-
-    public void setPurchaseDate(Calendar purchaseDate) {
-        this.purchaseDate = purchaseDate;
-        this.purchaseDateFormated = dateFormat.format(purchaseDate.getTime());
-    }
-
-    public void setPurchaseDate(String date){
-        String[] fechArray = date.split("/");
-
-        int dia = Integer.valueOf(fechArray[0]);
-        int mes = Integer.valueOf(fechArray[1]) - 1;
-        int anio = Integer.valueOf(fechArray[2]);
-
-        purchaseDate = new GregorianCalendar(anio, mes, dia);
-        purchaseDateFormated=date;
+    public boolean setDescription(String description) {
+        boolean valid = description != null ? !description.isEmpty() : false;
+        if (valid) {
+            this.description = description;
+        }
+        return valid;
     }
 
     public boolean isFavorite() {
@@ -188,9 +199,22 @@ public class Clothe implements Parcelable {
         this.image = image;
     }
 
-    public String getPurchaseDateFormated() {
-        return purchaseDateFormated;
+    public String getPurchaseDate() {
+        return purchaseDate;
     }
+
+    public boolean setPurchaseDate(String purchaseDate) {
+        boolean valid=false;
+        if (purchaseDate != null) {
+            valid = purchaseDate.matches("^([0-2][0-9]|3[0-1])(\\/|-)(0[1-9]|1[0-2])\\2(\\d{4})$");
+            if (valid) {
+                this.purchaseDate = purchaseDate;
+            }
+        }
+        return valid;
+    }
+
+
 
     @Override
     public String toString() {

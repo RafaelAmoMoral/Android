@@ -44,6 +44,7 @@
     <string name="search_activity_button_calendar">Añadir</string>
     <string name="search_activity_button_search">Filtrar</string>
     <string-array name="search_states">
+        <item>Seleccione un elemento...</item>
         <item>Nuevo</item>
         <item>Seminuevo</item>
         <item>Algo Desgastado</item>

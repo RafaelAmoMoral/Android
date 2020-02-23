@@ -34,7 +34,7 @@ public class ClotheAdapter
         extends RecyclerView.Adapter<ClotheAdapter.AcontecimientoViewHolder>
         implements View.OnClickListener {
 
-    private List<Clothe> items;
+    private List<Clothe> clothes;
     private View.OnClickListener listener;
 
     // Clase interna:
@@ -72,8 +72,16 @@ public class ClotheAdapter
     }
 
     // Contruye el objeto adaptador recibiendo la lista de datos
-    public ClotheAdapter(@NonNull List<Clothe> items) {
-        this.items = items;
+    public ClotheAdapter(@NonNull List<Clothe> clothes) {
+        this.clothes = clothes;
+    }
+
+    public List<Clothe> getClothes() {
+        return clothes;
+    }
+
+    public void setClothes(List<Clothe> items) {
+        this.clothes = items;
     }
 
     // Se encarga de crear los nuevos objetos ViewHolder necesarios
@@ -92,14 +100,14 @@ public class ClotheAdapter
     // Se encarga de actualizar los datos de un ViewHolder ya existente.
     @Override
     public void onBindViewHolder(AcontecimientoViewHolder viewHolder, int position) {
-        Clothe item = items.get(position);
+        Clothe item = clothes.get(position);
         viewHolder.AcontecimientoBind(item);
     }
 
     // Indica el número de elementos de la colección de datos.
     @Override
     public int getItemCount() {
-        return items.size();
+        return clothes.size();
     }
 
     // Asigna un listener al elemento

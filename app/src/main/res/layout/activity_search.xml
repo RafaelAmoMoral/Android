@@ -37,12 +37,14 @@
             android:orientation="vertical">
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/search_name_inputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="20dp"
                 android:focusableInTouchMode="false">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/search_name_editText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/ic_tshirt"
@@ -57,12 +59,13 @@
                 android:orientation="horizontal">
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/search_date_inputLayout"
                     android:layout_width="0px"
                     android:layout_height="wrap_content"
                     android:layout_weight="3">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/et_mostrar_hora_search"
+                        android:id="@+id/search_fecha_editText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/ic_calendar"
@@ -85,7 +88,7 @@
             </LinearLayout>
 
             <Spinner
-                android:id="@+id/spinner2"
+                android:id="@+id/search_state_spinner"
                 android:layout_width="match_parent"
                 android:layout_height="49dp"
                 android:layout_marginBottom="20dp"

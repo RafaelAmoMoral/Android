@@ -1,37 +1,37 @@
 package com.example.clothes.view;
 
-import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 
+import com.example.clothes.PermissionsManager;
 import com.example.clothes.R;
 import com.example.clothes.interfaces.IForm;
 import com.example.clothes.model.Clothe;
+import com.example.clothes.model.ClotheDAO;
 import com.example.clothes.presenter.FormPresenter;
 import com.example.clothes.view.Utils.DatePicker;
-import com.google.android.material.snackbar.Snackbar;
+import com.example.clothes.view.Utils.Images;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityCompat;
 
 import android.util.Base64;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -51,13 +51,9 @@ public class FormActivity extends AppCompatActivity implements IForm.View {
     public static final String TAG = "Clothes/FormActivity";
 
     private IForm.Presenter presenter;
-    private static Clothe clothe;
-
-    private static final int CODE_READ_EXTERNAL_STORAGE_PERMISSION = 123;
-    private static final int REQUEST_SELECT_IMAGE = 456;
+    private Clothe clothe;
 
     private ImageView image;
-    private TextInputEditText idEditText;
     private TextInputEditText nameEditText;
     private TextInputEditText sizeEditText;
     private TextInputEditText descriptionEditText;
@@ -66,6 +62,8 @@ public class FormActivity extends AppCompatActivity implements IForm.View {
     private DatePicker datePicker;
     private Switch favourite;
     private Spinner state;
+
+    private Button saveButton;
 
 
     public FormActivity() {
@@ -76,6 +74,7 @@ public class FormActivity extends AppCompatActivity implements IForm.View {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form);
+        clothe = getIntent().getExtras().getParcelable("clothe");
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -83,28 +82,6 @@ public class FormActivity extends AppCompatActivity implements IForm.View {
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setDisplayShowHomeEnabled(true);
 
-        Button saveButton = findViewById(R.id.id_search_button);
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                saveFormDataIntoClothe();
-                if (presenter.isFormValid(clothe)) ;
-                presenter.onClickSaveData(clothe);
-            }
-        });
-
-        this.datePicker = new DatePicker((EditText) findViewById(R.id.et_mostrar_hora),
-                (Button) findViewById(R.id.btn_mostrar_hora));
-
-        image = findViewById(R.id.imageView2);
-        image.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                presenter.onClickImage(view.getContext());
-            }
-        });
-
-        idEditText = findViewById(R.id.form_id_editText);
         nameEditText = findViewById(R.id.form_name_editText);
         sizeEditText = findViewById(R.id.form_size_ediText);
         descriptionEditText = findViewById(R.id.form_description_editText);
@@ -112,152 +89,21 @@ public class FormActivity extends AppCompatActivity implements IForm.View {
         dateEditText = findViewById(R.id.et_mostrar_hora);
         favourite = findViewById(R.id.form_switch_state);
         state = findViewById(R.id.form_spinner_states);
-
-        setFormFieldsErrors();
-        setFormFieldsValues();
-        setSpinner();
-    }
-
-    @Override
-    public void requestPermmission() {
-        ActivityCompat.requestPermissions(FormActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                CODE_READ_EXTERNAL_STORAGE_PERMISSION);
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        switch (requestCode) {
-            case CODE_READ_EXTERNAL_STORAGE_PERMISSION:
-                presenter.resultPermissions(grantResults);
-                break;
-            default:
-                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        }
-    }
-
-    @Override
-    public void presentePermissionsSnackBar() {
-        /*View contextView=findViewById(R.id.parent);
-        Snackbar.make(contextView, R.string.form_state_text, Snackbar.LENGTH_SHORT).show();*/
-    }
-
-    @Override
-    public void openGallery() {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(
-                Intent.createChooser(intent, getResources().getString(R.string.form_image_chooser_title)),
-                REQUEST_SELECT_IMAGE);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (requestCode) {
-            case (REQUEST_SELECT_IMAGE):
-                if (resultCode == Activity.RESULT_OK) {
-                    Uri selectedImage = data.getData();
-                    String selectedPath = selectedImage.getPath();
-
-                    if (selectedPath != null) {
-                        InputStream imageStream = null;
-                        try {
-                            imageStream = getContentResolver().openInputStream(selectedImage);
-                        } catch (FileNotFoundException e) {
-                            e.printStackTrace();
-                        }
-
-                        Bitmap bmp = BitmapFactory.decodeStream(imageStream);
-                        resizeImage(bmp);
-                        image.setImageBitmap(bmp);
-                    }
-                }
-                break;
-        }
-    }
-
-    private void resizeImage(Bitmap bmp) {
-        int width = bmp.getWidth();
-        int height = bmp.getHeight();
-        int newWidth = 100;
-        int newHeight = 100;
-
-        float scaleWidth = ((float) newWidth) / width;
-        float scaleHeight = ((float) newHeight) / height;
-
-        Matrix matrix = new Matrix();
-        matrix.postScale(scaleWidth, scaleHeight);
-
-        bmp = Bitmap.createBitmap(bmp, 0, 0,
-                width, height, matrix, true);
-    }
-
-    public static void setClothe(Clothe clothe) {
-        FormActivity.clothe = clothe;
-    }
-
-    private void setFormFieldsValues() {
-        if (clothe != null) {
-            if (clothe.getImage() != null) {
-                byte[] decodedString = Base64.decode(clothe.getImage(), Base64.DEFAULT);
-                Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-                image.setImageBitmap(decodedByte);
-            } else {
-                Drawable d = getResources().getDrawable(R.drawable.ic_app);
-                image.setImageDrawable(d);
-            }
-            idEditText.setText(Integer.toString(clothe.getId()));
-            nameEditText.setText(clothe.getName());
-            sizeEditText.setText(clothe.getSize());
-            dateEditText.setText(clothe.getDescription());
-            priceEditText.setText(Integer.toString(clothe.getPrice().intValue()));
-            dateEditText.setText(clothe.getPurchaseDateFormated());
-        }
-    }
-
-    private void setSpinner() {
-        //Obtenemos nuestro spinner
-        final Spinner spinner = (Spinner) findViewById(R.id.form_spinner_states);
-
-        /*Convertimos nuestro array en una lista, en este caso un ArrayList, con scope final para que
-         * pueda ser accesible por la interfaz que implementaremos más adelante*/
-        final List<String> states = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.states)));
-        /* A continuación, creamos un ArrayAdapter pasándo por parámetro el contexto en el que se encuentra,
-         * el recurso IMPLEMENTADO POR DEFECTO EN ANDROID android.R.layout.simple_spinner_item y nuestra lista*/
-        final ArrayAdapter spinnerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, states);
-
-        //Añadimos el ArrayAdapter al spinner
-        spinner.setAdapter(spinnerAdapter);
-
-        /*Añadimos un nuevo itemListener al spinner creándo al vuelo la interfaz OnItemSelectedListener e
-          implementándo sus métodos*/
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                /*Obtenemos el valor  del objeto seleccionado y si es igual a nuestro Nuevo... abrimos
-                nuestro dialogo*/
-                String selectedItem = parent.getItemAtPosition(position).toString();
-                if (selectedItem.equals("Añadir...")) {
-                    /*Construimos nuestro dialogo con la actividad que lo lanzará, el spinnerAdapter
-                    y la lista con el contenido del spinner.*/
-                    AddItemDialog dialog = new AddItemDialog(FormActivity.this, spinnerAdapter, states, spinner);
-                    dialog.show();
-                }
-            }
-
-            public void onNothingSelected(AdapterView<?> parent) {
-                //Que quiero hacer cuando no haya nada seleccionado
+        image = findViewById(R.id.imageView2);
+        image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                presenter.onClickImage(view.getContext(), FormActivity.this);
             }
         });
-    }
+        datePicker = new DatePicker((EditText) findViewById(R.id.et_mostrar_hora),
+                (Button) findViewById(R.id.btn_mostrar_hora));
+        saveButton = findViewById(R.id.id_search_button);
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-    }
-
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
+        setSpinner();
+        setFormFieldsValues();
+        setActivityMode();
+        invalidateOptionsMenu();
     }
 
     @Override
@@ -266,8 +112,105 @@ public class FormActivity extends AppCompatActivity implements IForm.View {
         return true;
     }
 
+    /**
+     * A partir de Android 3.0, no se puede llamar implicitamente al método onPrepareOptionsMenu, para
+     * poder llamarlo se ha de hacer explicitamente a través de este método.
+     */
+    @Override
+    public void invalidateOptionsMenu() {
+        super.invalidateOptionsMenu();
+    }
+
+    /**
+     * Método usado una única vez al iniciar la actividad. Si el objeto clothe de esta clase es igual
+     * a null (lo que significaría que se esta añadiendo), la opción eliminar que se encuentra en el
+     * índice 1 del menú se ocultaría, de lo contrario se mostraría.
+     *
+     * @param menu Menu actual de la actividad.
+     * @return Debe devolver verdadero para mostrar el menú.
+     */
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        menu.getItem(1).setVisible(this.clothe != null);
+        return true;
+    }
+
+    /**
+     * Método usado cada vez que se clica en el apartado del menú la opción de borrar. Este método usa
+     * reflexión, es decir el nombre del mismo es usado para que la JVM lo encuentre.
+     * Si queremos ver su uso click derecho en el nombre, find usages.
+     *
+     * @param aboutItem item clicado del menú.
+     */
     public void delete(MenuItem aboutItem) {
         createSimpleDialog().show();
+    }
+
+    /**
+     * Método usado para insertar los valores predefinidos del spinner, además llama al método
+     * appendDatabaseStates para añadir a los estados por defecto los que el usuario añadio en
+     * anteriores prendas.
+     */
+    private void setSpinner() {
+        final List<String> states = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.states)));
+        final ArrayAdapter spinnerAdapter = new ArrayAdapter<String>(
+                this, android.R.layout.simple_spinner_item, appendDatabaseStates(states));
+
+        state.setAdapter(spinnerAdapter);
+
+        state.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selectedItem = parent.getItemAtPosition(position).toString();
+                if (selectedItem.equals("Añadir...")) {
+                    AddItemDialog dialog = new AddItemDialog(FormActivity.this, spinnerAdapter, states, state);
+                    dialog.show();
+                }
+            }
+
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+    }
+
+    private List<String> appendDatabaseStates(List<String> states) {
+        List<String> nonDefaultStates = ClotheDAO.getStates();
+        List<String> finalStates = states;
+        states.remove(states.size() - 1);
+
+        boolean repeated = false;
+        for (int i = 0; i < nonDefaultStates.size(); i++) {
+            repeated = false;
+            for (int z = 0; z < states.size() && !repeated; z++) {
+                if (states.get(z).equals(nonDefaultStates.get(i))) {
+                    repeated = true;
+                }
+            }
+            if (repeated == false) {
+                finalStates.add(nonDefaultStates.get(i));
+            }
+        }
+
+        states.add("Añadir...");
+
+        return finalStates;
+    }
+
+    private void setActivityMode() {
+        if (clothe == null) {
+            saveButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    saveClothe();
+                }
+            });
+        } else {
+            saveButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    updateClothe();
+                }
+            });
+        }
     }
 
     public AlertDialog createSimpleDialog() {
@@ -280,15 +223,13 @@ public class FormActivity extends AppCompatActivity implements IForm.View {
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                System.out.println("Borrate");
-                                presenter.onClickRemoveData(new Clothe());
+                                presenter.onClickRemoveData(clothe, Activity.RESULT_CANCELED);
                             }
                         })
                 .setNegativeButton("Cancelar",
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                System.out.println("Me arrepenti");
                                 dialog.dismiss();
                             }
                         });
@@ -298,69 +239,110 @@ public class FormActivity extends AppCompatActivity implements IForm.View {
     }
 
     @Override
-    public void showMainList() {
+    public void displayMainActivity(Clothe c, Integer code) {
+        Intent resultIntent = new Intent();
+        resultIntent.putExtra("clothe", c);
+        setResult(code, resultIntent);
         finish();
     }
 
-    private void setFormFieldsErrors() {
-
-        nameEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    TextInputEditText et = (TextInputEditText) v;
-                    et.setText(et.getText().toString().trim());
-                    presenter.testName(et.getText().toString());
+    /**
+     * Método usado para agregar los valores de la prenda al formulario, además si no tiene imagen,
+     * le añade una por defecto.
+     */
+    private void setFormFieldsValues() {
+        if (clothe != null) {
+            if (clothe.getImage() != null) {
+                byte[] decodedString = Base64.decode(clothe.getImage(), Base64.DEFAULT);
+                Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                image.setImageBitmap(decodedByte);
+            } else {
+                Drawable d = getResources().getDrawable(R.drawable.ic_app);
+                image.setImageDrawable(d);
+            }
+            nameEditText.setText(clothe.getName());
+            priceEditText.setText(Integer.toString(clothe.getPrice().intValue()));
+            sizeEditText.setText(clothe.getSize());
+            descriptionEditText.setText(clothe.getDescription());
+            dateEditText.setText(clothe.getPurchaseDate());
+            favourite.setChecked(clothe.isFavorite());
+            Adapter adapter = state.getAdapter();
+            int n = adapter.getCount();
+            boolean find = false;
+            for (int i = 0; i < n && !find; i++) {
+                String c = (String) adapter.getItem(i);
+                if (c.equals(clothe.getState())) {
+                    state.setSelection(i);
+                    find = true;
                 }
             }
-        });
-
-        priceEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    TextInputEditText et = (TextInputEditText) v;
-                    et.setText(et.getText().toString().trim());
-                    presenter.testPrice(et.getText().toString());
-                }
-            }
-        });
-
-        sizeEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    TextInputEditText et = (TextInputEditText) v;
-                    et.setText(et.getText().toString().trim());
-                    presenter.testSize(et.getText().toString());
-                }
-            }
-        });
-
-        descriptionEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    TextInputEditText et = (TextInputEditText) v;
-                    et.setText(et.getText().toString().trim());
-                    presenter.testDescription(et.getText().toString());
-                }
-            }
-        });
-
-
-        dateEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    TextInputEditText et = (TextInputEditText) v;
-                    et.setText(et.getText().toString().trim());
-                    presenter.testDate(et.getText().toString());
-                }
-            }
-        });
-
+        }
     }
+
+
+    /**
+     * Método encargado de obtener todos los datos del formulario.
+     */
+    public boolean getFormValues() {
+        List<Boolean> validFields = new ArrayList<>();
+
+        boolean isNameWellFormed = clothe.setName(nameEditText.getText().toString().trim());
+        setNameError(isNameWellFormed ? "" : "El campo es obligatorio");
+        validFields.add(isNameWellFormed);
+
+        try {
+            boolean isPriceWellFormed = clothe.setPrice(Integer.parseInt(priceEditText.getText().toString().trim()));
+            setPriceError(isPriceWellFormed ?  "":"Formato de numero inválido");
+            validFields.add(isPriceWellFormed);
+        } catch (NumberFormatException nfe) {
+            clothe.setPrice(-1);
+            setPriceError("Formato de numero inválido");
+            validFields.add(false);
+        }
+
+        boolean isSizeWellFormed = clothe.setSize(sizeEditText.getText().toString().trim());
+        setSizeError(isSizeWellFormed ? "" : "Tallas disponibles: 'S', 'XS', 'M', 'XM', 'XL'");
+        validFields.add(isSizeWellFormed);
+
+        boolean isDescriptionWellFormed = clothe.setDescription(descriptionEditText.getText().toString().trim());
+        setDescriptionError(isDescriptionWellFormed ? "" : "El campo es obligatorio");
+        validFields.add(isSizeWellFormed);
+
+        boolean isDateWellFormed = clothe.setPurchaseDate(dateEditText.getText().toString().trim());
+        setDateError(isSizeWellFormed ? "" : "Formato de fecha permitido: dd/mm/yyyy");
+        validFields.add(isDateWellFormed);
+
+        clothe.setFavorite(favourite.isChecked());
+        clothe.setState(state.getSelectedItem().toString());
+        clothe.setImage(Images.fromImageViewToBase64(image));
+
+        boolean valid = true;
+        for (int i = 0; i < validFields.size() && valid; i++) {
+            if (validFields.get(i) == false) {
+                valid = false;
+            }
+        }
+        return valid;
+    }
+
+    /**
+     * Método usado al clicar en el boton de añadir del formulario. Instancio un nuevo objeto ya que
+     * aunque tenga valores debe de ser sobreescrito.
+     */
+    public void saveClothe() {
+        clothe = new Clothe();
+        if(getFormValues()){
+            presenter.onClickSaveData(clothe);
+        }
+    }
+
+    public void updateClothe() {
+        if(getFormValues()){
+            presenter.onClickUpdateClothe(clothe, Activity.RESULT_OK);
+        }
+    }
+
+    //Mensajes de error del formulario
 
     @Override
     public void setNameError(String error) {
@@ -393,51 +375,55 @@ public class FormActivity extends AppCompatActivity implements IForm.View {
         descripcionInputLayout.setError(error);
     }
 
-    public void saveFormDataIntoClothe() {
-        clothe.setName(nameEditText.getText().toString().trim());
-        clothe.setPrice(Integer.parseInt(priceEditText.getText().toString().trim()));
-        clothe.setSize(sizeEditText.getText().toString().trim());
-        clothe.setDescription(descriptionEditText.getText().toString().trim());
-        clothe.setPurchaseDate(dateEditText.getText().toString().trim());
-        clothe.setFavorite(favourite.isChecked());
-        clothe.setState(state.getSelectedItem().toString());
+    //A partir de aqui manejo el acceso a la galeria
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case (PermissionsManager.REQUEST_SELECT_IMAGE):
+                if (resultCode == Activity.RESULT_OK) {
+                    Uri selectedImage = data.getData();
+                    String selectedPath = selectedImage.getPath();
+
+                    if (selectedPath != null) {
+                        InputStream imageStream = null;
+                        try {
+                            imageStream = getContentResolver().openInputStream(selectedImage);
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
+
+                        Bitmap bmp = BitmapFactory.decodeStream(imageStream);
+                        Images.resizeImage(bmp);
+                        image.setImageBitmap(bmp);
+                    }
+                }
+                break;
+        }
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        Log.d(TAG, "onStart");
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case PermissionsManager.CODE_READ_EXTERNAL_STORAGE_PERMISSION:
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    openGallery();
+                } else {
+                    //Mensaje con que debe de aceptar para tener las funcionalidades
+                }
+                break;
+            default:
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        Log.d(TAG, "onResume");
+    public void openGallery() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, getResources().getString(
+                R.string.form_image_chooser_title)), PermissionsManager.REQUEST_SELECT_IMAGE);
     }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.d(TAG, "onPause");
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.d(TAG, "onStop");
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        Log.d(TAG, "onRestart");
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.d(TAG, "onDestroy");
-    }
-
 
 }

@@ -1,5 +1,6 @@
 package com.example.clothes.interfaces;
 
+import android.app.Activity;
 import android.content.Context;
 
 import androidx.core.content.ContextCompat;
@@ -12,27 +13,19 @@ public interface IForm {
 
     interface View{
         void openGallery();
-        void requestPermmission();
-        void showMainList();
+        void displayMainActivity(Clothe c, Integer activityCode);
         void setNameError(String error);
         void setPriceError(String error);
         void setSizeError(String error);
         void setDescriptionError(String error);
         void setDateError(String error);
-        void presentePermissionsSnackBar();
     }
 
     interface Presenter{
-        void resultPermissions(int[] grantResults);
-        void onClickImage(Context context);
+        void onClickImage(Context context, Activity a);
         void onClickSaveData(Clothe c);
-        void onClickRemoveData(Clothe c);
-        boolean isFormValid(Clothe formClothe);
-        boolean testName(String name);
-        boolean testPrice(String price);
-        boolean testSize(String size);
-        boolean testDescription(String description);
-        boolean testDate(String date);
+        void onClickUpdateClothe(Clothe c, Integer activityCode);
+        void onClickRemoveData(Clothe c, Integer activityCode);
     }
 
 }

@@ -10,18 +10,27 @@ public interface Ilist {
 
     // Interfaces anidadas de la interfaz IList
 
-    interface View{
-        void showForm();
+    interface View {
         void about(MenuItem menuItem);
+
         void search(MenuItem searchItem);
-        void displayFormClothe(Clothe selectedClothe);
+
+        void displayFormClothe(Clothe selectedClothe, int formMode);
+
         void showDeleteClotheDialog(int clotheSelected);
     }
 
-    interface Presenter{
+    interface Presenter {
         void onClickAdd();
+
         List<Clothe> getClothes();
+
+        Clothe getClothe(Integer id);
+
         void onClotheClicked(Clothe selectedClothe);
+
         void onClotheSwipped(int clothSelected);
+
+        boolean removeClothe(int id);
     }
 }
