@@ -18,74 +18,74 @@ public class ClotheTest {
 
     @Test
     public void setName() {
-        assertEquals(test.setName(null),false); //1
+        assertEquals(test.setName(null),false); //CP-Clothe-01
         assertEquals(test.getName(),null);
 
-        assertEquals(test.setName(""),false); //2
+        assertEquals(test.setName(""),false); //CP-Clothe-02
         assertEquals(test.getName(),null);
 
-        assertEquals(test.setName("Jersey"),true); //3
+        assertEquals(test.setName("Jersey"),true); //CP-Clothe-03
         assertEquals(test.getName(),"Jersey");
     }
 
     @Test
     public void setPrice() {
-        assertEquals(test.setPrice(null),false); //1
+        assertEquals(test.setPrice(null),false); //CP-Clothe-01
         assertEquals(test.getPrice(),null);
 
-        assertEquals(test.setPrice(-1),false); //2
+        assertEquals(test.setPrice(-1),false); //CP-Clothe-02
         assertEquals(test.getPrice(),null);
 
-        assertEquals(test.setPrice(10),true); //3
+        assertEquals(test.setPrice(10),true); //CP-Clothe-03
         assertEquals(test.getPrice(),new Integer(10));
     }
 
     @Test
     public void setSize() {
-        assertEquals(test.setSize(null),false); //1
+        assertEquals(test.setSize(null),false); //CP-Clothe-01
         assertEquals(test.getSize(),null);
 
-        assertEquals(test.setSize(""),false); //2
+        assertEquals(test.setSize(""),false); //CP-Clothe-02
         assertEquals(test.getSize(),null);
 
-        assertEquals(test.setSize("P"),false); //3
+        assertEquals(test.setSize("P"),false); //CP-Clothe-03
         assertEquals(test.getSize(),null);
 
-        assertEquals(test.setSize("XS"),true); //4
+        assertEquals(test.setSize("XS"),true); //CP-Clothe-04
         assertEquals(test.getSize(),"XS");
 
     }
 
     @Test
     public void setDescription() {
-        assertEquals(test.setDescription(null),false); //1
+        assertEquals(test.setDescription(null),false); //CP-Clothe-01
         assertEquals(test.getDescription(),null);
 
-        assertEquals(test.setDescription(""),false); //2
+        assertEquals(test.setDescription(""),false); //CP-Clothe-02
         assertEquals(test.getDescription(),null);
 
-        assertEquals(test.setDescription("Un Jersey muy viejo"),true); //3
+        assertEquals(test.setDescription("Un Jersey muy viejo"),true); //CP-Clothe-03
         assertEquals(test.getDescription(),"Un Jersey muy viejo");
     }
 
     @Test
     public void setPurchaseDate() {
-        assertEquals(test.setPurchaseDate(null),false); //1
+        assertEquals(test.setPurchaseDate(null),false); //CP-Clothe-01
         assertEquals(test.getPurchaseDate(),null);
 
-        assertEquals(test.setPurchaseDate(""),false); //2
+        assertEquals(test.setPurchaseDate(""),false); //CP-Clothe-02
         assertEquals(test.getPurchaseDate(),null);
 
-        assertEquals(test.setPurchaseDate("100/100/100"),false); //3
+        assertEquals(test.setPurchaseDate("100/100/100"),false); //CP-Clothe-03
         assertEquals(test.getPurchaseDate(),null);
 
-        assertEquals(test.setPurchaseDate("10/100/100"),false); //4
+        assertEquals(test.setPurchaseDate("10/100/100"),false); //CP-Clothe-04
         assertEquals(test.getPurchaseDate(),null);
 
-        assertEquals(test.setPurchaseDate("10/100/2001"),false); //5
+        assertEquals(test.setPurchaseDate("10/100/2001"),false); //CP-Clothe-05
         assertEquals(test.getPurchaseDate(),null);
 
-        assertEquals(test.setPurchaseDate("10/10/2001"),true); //6
+        assertEquals(test.setPurchaseDate("10/10/2001"),true); //CP-Clothe-06
         assertEquals(test.getPurchaseDate(),"10/10/2001");
 
     }

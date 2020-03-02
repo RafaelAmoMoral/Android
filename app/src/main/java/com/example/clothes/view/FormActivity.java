@@ -18,6 +18,7 @@ import com.example.clothes.interfaces.IForm;
 import com.example.clothes.model.Clothe;
 import com.example.clothes.model.ClotheDAO;
 import com.example.clothes.presenter.FormPresenter;
+import com.example.clothes.view.ActivityList.ActivityList;
 import com.example.clothes.view.Utils.DatePicker;
 import com.example.clothes.view.Utils.Images;
 import com.google.android.material.textfield.TextInputEditText;
@@ -144,6 +145,12 @@ public class FormActivity extends AppCompatActivity implements IForm.View {
      */
     public void delete(MenuItem aboutItem) {
         createSimpleDialog().show();
+    }
+
+    public void help(MenuItem item){
+        Intent intent = new Intent(FormActivity.this, HelpActivity.class);
+        intent.putExtra("PAGE", HelpActivity.FORM_PAGE);
+        startActivity(intent);
     }
 
     /**

@@ -15,7 +15,7 @@ import com.example.clothes.MyApplication;
 
 public class Database extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME = "ClothesDB";
+    public static final String DATABASE_NAME = "ClothesDB";
     private static final int DATABASE_VERSION = 1;
     private static Database me;
 

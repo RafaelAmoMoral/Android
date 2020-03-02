@@ -12,7 +12,7 @@
 
     <!--ACTIVITY LIST-->
     <string name="list_menu_order">Ordenar</string>
-    <string name="list_menu_conf">Configuración</string>
+    <string name="list_menu_help">Ayuda</string>
     <string name="list_menu_about">Sobre Clothes</string>
 
     <!--ACTIVITY FORM-->
@@ -26,7 +26,7 @@
     <string name="form_favourite_text">Favorito</string>
     <string name="form_state_text">Estado</string>
     <string name="form_add_article_text">Añadir</string>
-    <string name="form_menu_options">Opciones</string>
+    <string name="form_menu_help">Ayuda</string>
     <string name="form_menu_delete">Eliminar</string>
     <string-array name="states">
         <item>Nuevo</item>
@@ -50,6 +50,7 @@
         <item>Algo Desgastado</item>
         <item>Desgastado</item>
     </string-array>
+    <string name="search_menu_help">Ayuda</string>
 
 
 
@@ -59,5 +60,8 @@
     <string name="addItem_dialog_title">Añade un nuevo estado</string>
     <string name="addItem_dialog_add">AÑADIR</string>
     <string name="addItem_dialog_cancel">CANCELAR</string>
+
+    <!--ACTIVITY HELP-->
+    <string name="title_activity_help">Ayuda</string>
 
 </resources>

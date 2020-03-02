@@ -8,9 +8,10 @@
         android:title="@string/list_menu_order"
         app:showAsAction="never" />
     <item
-        android:id="@+id/action_conf"
+        android:id="@+id/action_help"
+        android:onClick="help"
         android:orderInCategory="100"
-        android:title="@string/list_menu_conf"
+        android:title="@string/list_menu_help"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_about"

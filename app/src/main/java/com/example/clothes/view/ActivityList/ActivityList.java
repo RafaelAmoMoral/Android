@@ -12,6 +12,7 @@ import com.example.clothes.model.Clothe;
 import com.example.clothes.presenter.ListPresenter;
 import com.example.clothes.view.AboutActivity;
 import com.example.clothes.view.FormActivity;
+import com.example.clothes.view.HelpActivity;
 import com.example.clothes.view.SearchActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
@@ -155,13 +156,18 @@ public class ActivityList extends AppCompatActivity implements Ilist.View {
      *
      * @param aboutItem
      */
-    @Override
     public void about(MenuItem aboutItem) {
         Intent intent = new Intent(ActivityList.this, AboutActivity.class);
         startActivity(intent);
     }
 
-    @Override
+    public void help(MenuItem aboutItem) {
+        Intent intent = new Intent(ActivityList.this, HelpActivity.class);
+        intent.putExtra("PAGE", HelpActivity.LIST_PAGE);
+        startActivity(intent);
+    }
+
+   @Override
     public void displayFormClothe(Clothe selectedClothe, int formMode) {
         Intent intent = new Intent(ActivityList.this, FormActivity.class);
         intent.putExtra("clothe", selectedClothe);
